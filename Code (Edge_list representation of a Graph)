@@ -1,0 +1,54 @@
+'''
+This is code to represent a graph as edge list.
+
+'''
+
+f_source = open("streamed_data.txt","r")
+
+destination = open("Edge_List.txt","w")
+destination.close()
+f_destination = open("Edge_List.txt","a")
+
+data = []
+unique_element = []
+
+for line in f_source:
+    v1,v2 = map(int,line.rstrip().split())
+    final = [v1, v2]
+    unique_element.append(v1)
+    unique_element.append(v2)
+    data.append(final)
+
+f_source.close()
+
+data.sort()
+unique_element = list(set(unique_element))
+
+
+edge_list = []
+element = 0
+
+for k in range(len(unique_element)):
+    doc = []
+    element = unique_element[k]
+    doc = [element]
+    for l in range(len(data)):
+        k = data[l]
+        if k[0] == element:
+            doc.append(k[1])
+    edge_list.append(doc)
+    
+## printing the edge list
+#print "Edge List"
+edge_list.sort()
+
+#f_final = [t_time , edge_list]
+
+#f_destination.write(str(f_final))
+
+for k in range(len(edge_list)):
+    kk = edge_list[k]
+    f_destination.write(str(kk) + "\n")
+    #print kk
+    
+f_destination.close()
